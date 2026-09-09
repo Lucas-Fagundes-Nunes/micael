@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirecionamento</title>
+</head>
+<body>
+
+  <button onclick="redirecionar()">Acessar</button>
+
+  <script>
+    const links = [
+      "https://script.google.com/macros/s/AKfycbwJ-y3PNbFBDUCXwiy2O_ZTMofXs2UOjCtS6bPMNbqiDRkqk7DRU_8qpKUgLc8ydQbVPw/exec"
+    ];
+
+    function redirecionar() {
+      const indice = Math.floor(Math.random() * links.length);
+      window.location.href = links[indice];
+    }
+  </script>
+
+</body>
+</html>
