@@ -1,24 +1,5391 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Redirecionamento</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+    <meta name="theme-color" content="#06265e">
+
+    <title>Missão Espaço • Álbum do Aniversário</title>
+
+    <meta name="description" content="Um álbum espacial para compartilhar fotos, vídeos e mensagens do aniversário.">
+
+    <!-- ============================================================
+       FONTES
+  ============================================================ -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito:wght@400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+
+    <!-- ============================================================
+       SISTEMA VISUAL
+  ============================================================ -->
+
+    <style>
+        :root {
+            --navy-950: #021431;
+            --navy-900: #031736;
+            --navy-800: #05285f;
+            --navy-700: #06265e;
+            --blue: #087be8;
+            --cyan: #42c7ff;
+            --blue-pale: #eaf6ff;
+            --orange: #ff650e;
+            --orange-light: #ff7b14;
+            --yellow: #ffbd22;
+            --ink: #073875;
+            --ink-light: #31567f;
+            --muted: #6a7d98;
+            --paper: #fffdf7;
+            --white: #fff;
+            --border: #dcecff;
+            --border-light: #e6f0fb;
+            --shadow-soft: 0 10px 28px rgba(16, 77, 130, .08);
+            --shadow-card: 0 16px 40px rgba(14, 70, 125, .10);
+            --shadow-heavy: 0 22px 70px rgba(0, 24, 76, .28);
+            --r-sm: 12px;
+            --r-md: 18px;
+            --r-lg: 24px;
+            --r-xl: 30px;
+            --content: 1100px;
+            --header: 68px;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box
+        }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--header)
+        }
+
+        body {
+            margin: 0;
+            min-width: 0;
+            overflow-x: hidden;
+            color: var(--ink);
+            background: var(--navy-950);
+            font-family: "Nunito", system-ui, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            z-index: -10;
+            background: radial-gradient(circle at 70% 15%, #0b5dc4 0, #052a68 35%, #021431 75%)
+        }
+
+        img,
+        video,
+        canvas {
+            max-width: 100%
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+            font: inherit;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        button {
+            cursor: pointer
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        h1,
+        h2,
+        h3,
+        p {
+            margin-top: 0
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: "Baloo 2", sans-serif
+        }
+
+        section[id],
+        .hero {
+            scroll-margin-top: calc(var(--header) + 10px)
+        }
+
+        /* Fundo espacial */
+
+        .stars {
+            position: fixed;
+            inset: 0;
+            z-index: -8;
+            pointer-events: none;
+            background-image:
+                radial-gradient(circle, #fff 1px, transparent 1.5px),
+                radial-gradient(circle, #8fdcff 1px, transparent 1.5px),
+                radial-gradient(circle, #fff 1.5px, transparent 2px);
+            background-size: 120px 120px, 190px 190px, 270px 270px;
+            background-position: 10px 20px, 50px 90px, 100px 10px;
+            opacity: .72;
+            animation: twinkle 5s ease-in-out infinite alternate
+        }
+
+        @keyframes twinkle {
+            to {
+                opacity: .4;
+                transform: scale(1.015)
+            }
+        }
+
+        .shooting-star {
+            position: fixed;
+            width: 100px;
+            height: 3px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, transparent, #fff, #ffbd22, transparent);
+            z-index: -6;
+            transform: rotate(-28deg);
+            animation: shoot 8s linear infinite;
+            pointer-events: none
+        }
+
+        .s1 {
+            top: 15%;
+            left: 75%;
+            animation-delay: 1s
+        }
+
+        .s2 {
+            top: 40%;
+            left: 15%;
+            animation-delay: 5s
+        }
+
+        @keyframes shoot {
+
+            0%,
+            72% {
+                opacity: 0;
+                transform: translate(0, 0) rotate(-28deg)
+            }
+
+            76% {
+                opacity: 1
+            }
+
+            85% {
+                opacity: 0;
+                transform: translate(-300px, 180px) rotate(-28deg)
+            }
+
+            100% {
+                opacity: 0
+            }
+        }
+
+        /* Navegação */
+
+        .topbar {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            width: 100%;
+            min-height: var(--header);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 max(12px, calc((100vw - 1200px)/2));
+            background: rgba(3, 25, 68, .84);
+            border-bottom: 1px solid rgba(255, 255, 255, .10);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px)
+        }
+
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            flex: 0 0 auto;
+            padding: 0;
+            color: #fff;
+            background: transparent;
+            border: 0;
+            white-space: nowrap
+        }
+
+        .brand-planet {
+            font-size: 27px;
+            line-height: 1
+        }
+
+        .brand span:last-child {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            line-height: .82
+        }
+
+        .brand b {
+            font-size: 9px;
+            letter-spacing: 2px
+        }
+
+        .brand strong {
+            color: #fff;
+            font-family: "Baloo 2", sans-serif;
+            font-size: 19px;
+            letter-spacing: 1px
+        }
+
+        .topbar nav {
+            min-width: 0;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 4px
+        }
+
+        .nav-scroll {
+            min-height: 40px;
+            padding: 8px 10px;
+            color: #eaf6ff;
+            background: transparent;
+            border: 0;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 900;
+            white-space: nowrap;
+            transition: background .2s, color .2s
+        }
+
+        .nav-scroll:hover,
+        .nav-scroll:active {
+            color: var(--yellow);
+            background: rgba(255, 255, 255, .07)
+        }
+
+        .sound-btn {
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+            color: #fff;
+            background: #0a438d;
+            border: 1px solid #4d8fd1;
+            border-radius: 50%;
+            transition: transform .2s
+        }
+
+        .sound-btn:active {
+            transform: scale(.92)
+        }
+
+        /* Botões */
+
+        .btn {
+            min-height: 46px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 12px 18px;
+            border: 0;
+            border-radius: 15px;
+            font-weight: 900;
+            transition: transform .2s, box-shadow .2s, background .2s;
+            touch-action: manipulation
+        }
+
+        .btn:hover {
+            transform: translateY(-2px)
+        }
+
+        .btn:active {
+            transform: scale(.97)
+        }
+
+        .btn:disabled {
+            cursor: not-allowed;
+            opacity: .65;
+            transform: none
+        }
+
+        .btn-primary {
+            color: #fff;
+            background: linear-gradient(135deg, var(--orange-light), #ff4c0b);
+            box-shadow: 0 10px 25px rgba(255, 85, 10, .28)
+        }
+
+        .btn-ghost {
+            color: #fff;
+            background: rgba(255, 255, 255, .10);
+            border: 1px solid rgba(255, 255, 255, .20)
+        }
+
+        .btn-small {
+            min-height: 40px;
+            padding: 9px 14px;
+            color: var(--ink);
+            background: #eaf5ff;
+            border-radius: 12px
+        }
+
+        /* Hero */
+
+        .hero {
+            position: relative;
+            min-height: max(650px, calc(100svh - var(--header)));
+            display: grid;
+            place-items: center;
+            padding: 58px 16px 72px;
+            overflow: hidden
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            width: min(100%, 780px);
+            text-align: center
+        }
+
+        .mission-badge,
+        .section-kicker {
+            font-size: 10px;
+            line-height: 1.3;
+            letter-spacing: 1.7px;
+            font-weight: 900
+        }
+
+        .mission-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 13px;
+            color: #8edbff;
+            background: rgba(5, 65, 138, .55);
+            border: 1px solid rgba(105, 208, 255, .45);
+            border-radius: 999px
+        }
+
+        .hero h1 {
+            margin: 20px 0 18px;
+            color: #fff;
+            font-size: clamp(50px, 15vw, 102px);
+            line-height: .82;
+            letter-spacing: -1px;
+            text-shadow: 0 7px 0 rgba(2, 40, 95, .7), 0 0 30px rgba(82, 202, 255, .18)
+        }
+
+        .hero h1 span {
+            color: #ff6a0a
+        }
+
+        .hero p {
+            width: min(100%, 650px);
+            margin: 24px auto 28px;
+            color: #dbeeff;
+            font-size: 16px;
+            line-height: 1.65
+        }
+
+        .hero-actions {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap
+        }
+
+        .hero-actions .btn {
+            min-width: 180px
+        }
+
+        .mission-stats {
+            display: flex;
+            justify-content: center;
+            gap: clamp(22px, 8vw, 55px);
+            margin-top: 34px
+        }
+
+        .mission-stats div {
+            display: flex;
+            flex-direction: column;
+            min-width: 60px
+        }
+
+        .mission-stats b {
+            color: #fff;
+            font-family: "Baloo 2", sans-serif;
+            font-size: 28px;
+            line-height: 1
+        }
+
+        .mission-stats span {
+            margin-top: 4px;
+            color: #8eb9e6;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: 1.2px
+        }
+
+        /* Astronauta */
+
+        .astronaut {
+            position: absolute;
+            width: 250px;
+            height: 300px;
+            left: -35px;
+            right: auto;
+            top: 80px;
+            z-index: 2;
+            transform: scale(.55) rotate(-8deg);
+            transform-origin: center;
+            animation: float 4s ease-in-out infinite;
+            filter: drop-shadow(0 18px 22px rgba(0, 0, 0, .3))
+        }
+
+        .astronaut-glow {
+            position: absolute;
+            inset: 30px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(74, 205, 255, .18), transparent 68%)
+        }
+
+        .helmet {
+            position: absolute;
+            width: 145px;
+            height: 128px;
+            left: 53px;
+            top: 10px;
+            background: linear-gradient(145deg, #fff, #cbd7e7);
+            border: 7px solid #e8f0fa;
+            border-radius: 49% 49% 46% 46%;
+            box-shadow: inset -7px -9px 0 #8da2bf, 0 5px 0 #174b8e
+        }
+
+        .visor {
+            position: absolute;
+            inset: 18px 15px 17px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 70% 20%, #5dcfff 0 5%, #082f69 25%, #011735 80%);
+            border: 5px solid #174b8e
+        }
+
+        .helmet i {
+            position: absolute;
+            width: 27px;
+            height: 40px;
+            top: 43px;
+            background: #ff7515;
+            border: 4px solid #164b89;
+            border-radius: 12px
+        }
+
+        .helmet i:first-of-type {
+            left: -20px
+        }
+
+        .helmet i:last-of-type {
+            right: -20px
+        }
+
+        .body-suit {
+            position: absolute;
+            width: 120px;
+            height: 128px;
+            left: 68px;
+            top: 120px;
+            background: linear-gradient(90deg, #f8fbff, #cbd7e5);
+            border: 5px solid #164b89;
+            border-radius: 35px 35px 25px 25px
+        }
+
+        .control {
+            position: absolute;
+            right: 13px;
+            top: 35px;
+            padding: 4px 6px;
+            color: #ffb41b;
+            background: #164b89;
+            border-radius: 7px;
+            font-size: 12px
+        }
+
+        .arm {
+            position: absolute;
+            width: 70px;
+            height: 35px;
+            background: #e6eef7;
+            border: 5px solid #174b8e;
+            border-radius: 30px
+        }
+
+        .arm-a {
+            left: 13px;
+            top: 142px;
+            transform: rotate(34deg)
+        }
+
+        .arm-b {
+            right: 10px;
+            top: 137px;
+            transform: rotate(-38deg)
+        }
+
+        .leg {
+            position: absolute;
+            width: 42px;
+            height: 86px;
+            background: #e7eef6;
+            border: 5px solid #174b8e;
+            border-radius: 20px
+        }
+
+        .leg-a {
+            left: 70px;
+            top: 226px;
+            transform: rotate(10deg)
+        }
+
+        .leg-b {
+            left: 128px;
+            top: 225px;
+            transform: rotate(-10deg)
+        }
+
+        .jet {
+            position: absolute;
+            right: 25px;
+            bottom: 4px;
+            font-size: 45px;
+            transform: rotate(8deg);
+            filter: drop-shadow(0 0 10px #ff8b18)
+        }
+
+        .planet {
+            position: absolute;
+            font-size: 150px;
+            opacity: .75;
+            pointer-events: none
+        }
+
+        .planet-left {
+            right: -35px;
+            bottom: -25px;
+            filter: drop-shadow(0 0 30px rgba(60, 180, 255, .4))
+        }
+
+        .orbit {
+            position: absolute;
+            width: 650px;
+            height: 220px;
+            right: -230px;
+            top: 170px;
+            border: 1px dashed rgba(104, 206, 255, .22);
+            border-radius: 50%;
+            transform: rotate(-20deg);
+            z-index: 0
+        }
+
+        .orbit-two {
+            width: 500px;
+            height: 170px;
+            left: -280px;
+            bottom: 100px;
+            transform: rotate(20deg)
+        }
+
+        @keyframes float {
+            50% {
+                transform: translateY(-22px) scale(.40) rotate(-8deg);
+            }
+        }
+
+        /* Seções */
+
+        .how,
+        .upload-section,
+        .gallery-section,
+        .messages-section,
+        .game-section {
+            position: relative;
+            padding: 64px 16px 72px;
+            text-align: center
+        }
+
+        .how {
+            background: var(--paper);
+            border-radius: 36px 36px 0 0
+        }
+
+        .how h2,
+        .upload-section h2,
+        .gallery-section h2,
+        .messages-section h2,
+        .game-section h2 {
+            margin: 7px 0 0;
+            color: var(--ink);
+            font-size: clamp(38px, 10vw, 62px);
+            line-height: .95
+        }
+
+        .section-kicker {
+            color: #1688dc
+        }
+
+        .section-lead {
+            width: min(100%, 680px);
+            margin: 15px auto 30px;
+            color: var(--muted);
+            line-height: 1.6;
+            font-size: 15px
+        }
+
+        .steps {
+            width: min(100%, 1050px);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 14px;
+            margin: 32px auto 0
+        }
+
+        .steps article {
+            padding: 22px;
+            text-align: left;
+            background: #fff;
+            border: 2px solid var(--border-light);
+            border-radius: 22px;
+            box-shadow: 0 12px 30px rgba(14, 70, 125, .08)
+        }
+
+        .steps span {
+            width: 43px;
+            height: 43px;
+            display: grid;
+            place-items: center;
+            color: var(--blue);
+            background: var(--blue-pale);
+            border-radius: 14px;
+            font-weight: 900
+        }
+
+        .steps h3 {
+            margin: 12px 0 4px;
+            color: var(--ink);
+            font-size: 27px
+        }
+
+        .steps p {
+            margin: 0;
+            color: #657995;
+            line-height: 1.55
+        }
+
+        /* Upload */
+
+        .upload-section {
+            background: linear-gradient(#fffdf7, #eef8ff)
+        }
+
+        .upload-card {
+            width: min(100%, 850px);
+            margin: 30px auto 0;
+            padding: 14px;
+            text-align: left;
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            box-shadow: var(--shadow-heavy)
+        }
+
+        .dropzone {
+            min-height: 165px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 15px;
+            text-align: center;
+            cursor: pointer;
+            background: #f5fbff;
+            border: 2px dashed #a8d6f7;
+            border-radius: 19px;
+            transition: background .2s, border-color .2s, transform .2s
+        }
+
+        .dropzone:hover,
+        .dropzone.drag {
+            background: #e8f7ff;
+            border-color: var(--blue);
+            transform: scale(1.005)
+        }
+
+        .dropzone input {
+            display: none
+        }
+
+        .upload-icon {
+            margin-bottom: 7px;
+            font-size: 42px;
+            animation: float 3s ease-in-out infinite
+        }
+
+        .dropzone strong {
+            max-width: 100%;
+            font-size: 16px;
+            overflow-wrap: anywhere
+        }
+
+        .dropzone small {
+            max-width: 100%;
+            margin-top: 5px;
+            color: #7990ad;
+            line-height: 1.4
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px
+        }
+
+        .upload-card label:not(.dropzone) {
+            display: block;
+            margin-top: 16px
+        }
+
+        .upload-card label span {
+            display: block;
+            margin-bottom: 7px;
+            font-size: 13px;
+            font-weight: 900
+        }
+
+        .optional,
+        .field-optional {
+            color: #7990ad;
+            font-weight: 600
+        }
+
+        .upload-card input,
+        .upload-card textarea,
+        .upload-card select {
+            width: 100%;
+            min-width: 0;
+            padding: 13px 14px;
+            color: #153e70;
+            background: #fbfdff;
+            border: 1px solid #d7e5f3;
+            border-radius: 13px;
+            outline: none;
+            font-size: 16px;
+            line-height: 1.4;
+            transition: border-color .2s, box-shadow .2s
+        }
+
+        .upload-card input:focus,
+        .upload-card textarea:focus,
+        .upload-card select:focus {
+            border-color: #3aaef4;
+            box-shadow: 0 0 0 4px #dff3ff
+        }
+
+        .upload-card textarea {
+            min-height: 110px;
+            resize: vertical
+        }
+
+        .upload-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 14px;
+            margin-top: 20px
+        }
+
+        .privacy-note {
+            color: #71849b;
+            font-size: 12px;
+            line-height: 1.45
+        }
+
+        .upload-footer .btn {
+            width: 100%
+        }
+
+        .progress-wrap {
+            height: 7px;
+            margin-top: 15px;
+            overflow: hidden;
+            display: none;
+            background: #e8f0f8;
+            border-radius: 99px
+        }
+
+        .progress-wrap.active {
+            display: block
+        }
+
+        .progress-wrap div {
+            width: 0;
+            height: 100%;
+            background: linear-gradient(90deg, #087be8, #42c7ff, #ff7116);
+            transition: width .2s
+        }
+
+        .form-status {
+            min-height: 22px;
+            margin: 12px 0 0;
+            text-align: center;
+            font-weight: 800
+        }
+
+        .success {
+            color: #168e56
+        }
+
+        .error {
+            color: #d73b2b
+        }
+
+        /* Galeria */
+
+        .gallery-section {
+            text-align: left;
+            background: var(--paper)
+        }
+
+        .section-heading {
+            width: min(100%, var(--content));
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 16px;
+            margin: 0 auto 26px
+        }
+
+        .section-heading>div {
+            min-width: 0
+        }
+
+        .section-heading .btn {
+            align-self: flex-start
+        }
+
+        .gallery {
+            width: min(100%, var(--content));
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 10px;
+            margin: auto
+        }
+
+        .media-card {
+            min-width: 0;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e1edf8;
+            border-radius: 17px;
+            box-shadow: 0 10px 25px rgba(15, 70, 120, .08);
+            cursor: pointer;
+            transition: transform .25s, box-shadow .25s
+        }
+
+        .media-card:hover {
+            transform: translateY(-4px) rotate(.2deg);
+            box-shadow: 0 18px 40px rgba(15, 70, 120, .16)
+        }
+
+        .media-thumb {
+            position: relative;
+            height: 155px;
+            overflow: hidden;
+            display: grid;
+            place-items: center;
+            background: #0b3978
+        }
+
+        .media-thumb img,
+        .media-thumb video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover
+        }
+
+        .media-thumb .play {
+            position: absolute;
+            width: 48px;
+            height: 48px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: rgba(0, 25, 65, .75);
+            border-radius: 50%;
+            font-size: 19px
+        }
+
+        .media-meta {
+            min-width: 0;
+            padding: 10px
+        }
+
+        .media-meta b {
+            display: block;
+            overflow: hidden;
+            font-size: 12px;
+            text-overflow: ellipsis;
+            white-space: nowrap
+        }
+
+        .media-meta p {
+            margin: 4px 0 0;
+            color: #6b7f99;
+            font-size: 11px;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden
+        }
+
+        .loading-card,
+        .empty-state {
+            grid-column: 1/-1;
+            padding: 45px 20px;
+            text-align: center;
+            color: #70839b;
+            line-height: 1.6
+        }
+
+        .loader {
+            width: 35px;
+            height: 35px;
+            margin: auto;
+            border: 4px solid #d8eaf8;
+            border-top-color: var(--blue);
+            border-radius: 50%;
+            animation: spin .8s linear infinite
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+
+        .loading-card p {
+            margin: 12px 0 0
+        }
+
+        .image-error {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 20px;
+            text-align: center;
+            color: rgba(255, 255, 255, .75);
+            background: rgba(7, 13, 30, .75)
+        }
+
+        .modal-image-error {
+            position: relative;
+            inset: auto;
+            min-height: 220px;
+            width: 100%
+        }
+
+        /* Mensagens */
+
+        .messages-section {
+            background: #f2f9ff
+        }
+
+        .message-wall {
+            width: min(100%, 1000px);
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 13px;
+            margin: 30px auto 0;
+            text-align: left
+        }
+
+        .message-card {
+            position: relative;
+            padding: 20px;
+            overflow: hidden;
+            background: #fff;
+            border-radius: 20px;
+            border-left: 5px solid #ff6b13;
+            box-shadow: 0 10px 28px rgba(16, 77, 130, .08)
+        }
+
+        .message-card::before {
+            content: "“";
+            position: absolute;
+            right: 14px;
+            top: 18px;
+            color: #ccecff;
+            font-family: Georgia, serif;
+            font-size: 55px;
+            line-height: .7
+        }
+
+        .message-card p {
+            position: relative;
+            z-index: 1;
+            margin: 0;
+            color: #31567f;
+            line-height: 1.6;
+            overflow-wrap: anywhere
+        }
+
+        .message-card strong {
+            display: block;
+            margin-top: 14px;
+            color: var(--blue);
+            font-size: 12px;
+            line-height: 1.4
+        }
+
+        /* Jogo */
+
+        .game-section {
+            color: #fff;
+            background: #05285f
+        }
+
+        .game-section h2 {
+            color: #fff
+        }
+
+        .game-section .section-kicker {
+            color: #7ed9ff
+        }
+
+        .game-section .section-lead {
+            color: #c9e3fa
+        }
+
+        .game-wrap {
+            position: relative;
+            width: min(100%, 800px);
+            margin: 25px auto 0;
+            overflow: hidden;
+            background: #021b42;
+            border: 4px solid #1c63a7;
+            border-radius: 20px;
+            box-shadow: 0 25px 70px rgba(0, 0, 0, .35)
+        }
+
+        .game-wrap canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            background: radial-gradient(circle at 50% 10%, #174f9a, #031536 75%)
+        }
+
+        .game-launch {
+            margin: 5px auto 0
+        }
+
+        .game-overlay {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            align-content: center;
+            gap: 5px;
+            padding: 20px;
+            text-align: center;
+            background: rgba(2, 20, 50, .72);
+            backdrop-filter: blur(4px)
+        }
+
+        .game-overlay h3 {
+            margin: 0;
+            color: #fff;
+            font-size: 28px
+        }
+
+        .game-icon {
+            font-size: 58px;
+            animation: float 2.5s ease-in-out infinite
+        }
+
+        .game-hud {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+            pointer-events: none
+        }
+
+        .game-hud span {
+            padding: 6px 9px;
+            color: #fff;
+            background: rgba(1, 24, 60, .68);
+            border: 1px solid rgba(255, 255, 255, .13);
+            border-radius: 99px;
+            font-size: 12px;
+            font-weight: 900
+        }
+
+        .game-controls {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+            z-index: 5;
+            pointer-events: none
+        }
+
+        .game-control-btn {
+            width: 68px;
+            height: 55px;
+            pointer-events: auto;
+            color: #fff;
+            background: rgba(1, 25, 65, .78);
+            border: 2px solid rgba(255, 255, 255, .55);
+            border-radius: 18px;
+            font-size: 28px;
+            font-weight: 900;
+            box-shadow: 0 8px 22px rgba(0, 0, 0, .3);
+            backdrop-filter: blur(5px);
+            touch-action: none;
+            user-select: none
+        }
+
+        .game-control-btn:active,
+        .game-control-btn.pressed {
+            transform: scale(.92);
+            background: rgba(8, 123, 232, .9);
+            border-color: #fff
+        }
+
+        .game-wrap:fullscreen {
+            width: 100vw;
+            max-width: none;
+            height: 100dvh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #020f2d;
+            border: 0;
+            border-radius: 0
+        }
+
+        .game-wrap:fullscreen canvas {
+            width: min(100vw, calc(100dvh * 800 / 460));
+            height: auto;
+            max-height: 100dvh;
+            object-fit: contain
+        }
+
+        .game-wrap:fullscreen .game-hud {
+            top: 24px;
+            left: 24px;
+            right: 24px
+        }
+
+        .game-wrap:fullscreen .game-controls {
+            bottom: 28px;
+            padding: 0 32px
+        }
+
+        .game-wrap:fullscreen .game-control-btn {
+            width: 100px;
+            height: 82px;
+            font-size: 42px
+        }
+
+        .game-wrap:fullscreen .game-overlay {
+            border-radius: 0
+        }
+
+        /* Rodapé */
+
+        footer {
+            position: relative;
+            padding: 65px 18px 40px;
+            text-align: center;
+            color: #d7ecff;
+            background: #031736
+        }
+
+        .footer-rocket {
+            font-size: 50px;
+            animation: float 3s ease-in-out infinite
+        }
+
+        footer h2 {
+            margin: 8px 0;
+            color: #fff;
+            font-size: clamp(31px, 8vw, 42px)
+        }
+
+        footer p {
+            max-width: 600px;
+            margin: 0 auto 12px;
+            color: #89afd4;
+            line-height: 1.5
+        }
+
+        footer small {
+            color: #4e77a5
+        }
+
+        /* Modal */
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 10px
+        }
+
+        .modal.open {
+            display: flex
+        }
+
+        .modal-backdrop {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 12, 34, .88);
+            backdrop-filter: blur(8px)
+        }
+
+        .modal-box {
+            position: relative;
+            z-index: 2;
+            width: min(1100px, 100%);
+            max-height: calc(100dvh - 20px);
+            overflow: hidden;
+            background: #061a3d;
+            border-radius: 18px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, .5)
+        }
+
+        #modalContent {
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 45px 10px 0
+        }
+
+        #modalContent img,
+        #modalContent video {
+            display: block;
+            width: auto;
+            height: auto;
+            max-width: calc(100vw - 40px);
+            max-height: 75dvh;
+            min-width: 120px;
+            object-fit: contain;
+            border-radius: 12px;
+            background: #061a3d
+        }
+
+        .modal-loading {
+            min-height: 240px;
+            display: grid;
+            place-items: center;
+            padding: 30px;
+            color: #fff;
+            font-weight: 800
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            z-index: 4;
+            width: 40px;
+            height: 40px;
+            display: grid;
+            place-items: center;
+            color: #fff;
+            background: #06265e;
+            border: 0;
+            border-radius: 50%;
+            font-size: 27px
+        }
+
+        .modal-caption {
+            max-height: 120px;
+            overflow-y: auto;
+            padding: 13px 16px 16px;
+            color: #dbeeff;
+            background: #061a3d;
+            font-size: 13px;
+            line-height: 1.5;
+            font-weight: 700
+        }
+
+        /* Tablet */
+
+        @media (min-width:651px) {
+
+            :root {
+                --header: 72px
+            }
+
+            .topbar {
+                padding: 0 max(20px, 5vw)
+            }
+
+            .brand-planet {
+                font-size: 30px
+            }
+
+            .brand b {
+                font-size: 11px
+            }
+
+            .brand strong {
+                font-size: 21px
+            }
+
+            .nav-scroll {
+                padding: 8px 12px;
+                font-size: 14px
+            }
+
+            .hero {
+                padding: 80px 6vw 90px
+            }
+
+            .hero p {
+                font-size: 18px
+            }
+
+            .steps {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px
+            }
+
+            .upload-card {
+                padding: 24px
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr 1fr
+            }
+
+            .upload-footer {
+                flex-direction: row;
+                align-items: center;
+                justify-content: space-between
+            }
+
+            .upload-footer .btn {
+                width: auto
+            }
+
+            .gallery {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+                gap: 14px
+            }
+
+            .media-thumb {
+                height: 190px
+            }
+
+            .message-wall {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px
+            }
+
+            .section-heading {
+                flex-direction: row;
+                align-items: end;
+                justify-content: space-between
+            }
+
+            .section-heading .btn {
+                align-self: auto
+            }
+        }
+
+        /* Desktop */
+
+        @media (min-width:901px) {
+
+            :root {
+                --header: 78px
+            }
+
+            .topbar {
+                padding: 0 max(22px, 5vw)
+            }
+
+            .hero {
+                min-height: 720px;
+                padding: 70px 7vw 90px
+            }
+
+            .astronaut {
+                left: -35px;
+                right: auto;
+                opacity: 1;
+                transform: scale(.55) rotate(-8deg);
+                transform-origin: center
+            }
+
+            .how,
+            .upload-section,
+            .gallery-section,
+            .messages-section,
+            .game-section {
+                padding: 90px max(22px, 7vw)
+            }
+
+            .how {
+                border-radius: 50px 50px 0 0
+            }
+
+            .upload-card {
+                padding: 28px;
+                border-radius: 30px
+            }
+
+            .gallery {
+                grid-template-columns: repeat(4, minmax(0, 1fr));
+                gap: 15px
+            }
+
+            .media-card {
+                border-radius: 20px
+            }
+
+            .media-thumb {
+                height: 220px
+            }
+
+            .media-meta {
+                padding: 13px
+            }
+
+            .media-meta b {
+                font-size: 14px
+            }
+
+            .media-meta p {
+                font-size: 12px
+            }
+
+            .message-wall {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .game-wrap {
+                border: 5px solid #1c63a7;
+                border-radius: 25px
+            }
+        }
+
+        /* Celulares */
+
+        @media (max-width:650px) {
+
+            .topbar {
+                overflow: hidden
+            }
+
+            .topbar nav {
+                justify-content: flex-start;
+                overflow-x: auto;
+                scrollbar-width: none;
+                -webkit-overflow-scrolling: touch
+            }
+
+            .topbar nav::-webkit-scrollbar {
+                display: none
+            }
+
+            .nav-scroll {
+                flex: 0 0 auto
+            }
+
+            .hero-content {
+                max-width: 680px
+            }
+
+            .astronaut {
+                left: -85px;
+                right: auto;
+                top: 100px;
+                transform: scale(.12) rotate(-25deg);
+                transform-origin: center;
+                opacity: .42
+            }
+
+            .planet-left {
+                font-size: 105px;
+                right: -30px;
+                bottom: -10px
+            }
+
+            .orbit {
+                right: -430px;
+                top: 150px;
+                opacity: .7
+            }
+
+            .orbit-two {
+                left: -420px;
+                bottom: 70px
+            }
+
+            .hero {
+                min-height: calc(100svh - var(--header));
+                padding-top: 68px
+            }
+
+            .hero h1 {
+                font-size: clamp(48px, 15vw, 76px)
+            }
+
+            .hero-actions {
+                flex-direction: column;
+                width: min(100%, 420px);
+                margin: auto
+            }
+
+            .hero-actions .btn {
+                width: 100%
+            }
+
+            .mission-stats {
+                margin-top: 28px
+            }
+
+            .upload-card {
+                box-shadow: 0 16px 42px rgba(0, 24, 76, .16)
+            }
+
+            .game-wrap {
+                border-width: 3px
+            }
+
+            .game-hud {
+                top: 7px;
+                left: 7px;
+                right: 7px
+            }
+
+            .game-hud span {
+                padding: 5px 7px;
+                font-size: 10px
+            }
+
+            .game-control-btn {
+                width: 62px;
+                height: 52px;
+                font-size: 26px
+            }
+
+            .modal-box {
+                max-height: calc(100dvh - 12px);
+                border-radius: 15px
+            }
+
+            .modal {
+                padding: 6px
+            }
+
+            #modalContent {
+                padding-top: 48px
+            }
+
+            #modalContent img,
+            #modalContent video {
+                max-width: calc(100vw - 24px);
+                max-height: 68dvh
+            }
+        }
+
+        @media (max-width:480px) {
+
+            :root {
+                --header: 62px
+            }
+
+            .topbar {
+                padding: 0 9px;
+                gap: 5px
+            }
+
+            .brand {
+                gap: 5px
+            }
+
+            .brand-planet {
+                font-size: 24px
+            }
+
+            .brand b {
+                font-size: 8px
+            }
+
+            .brand strong {
+                font-size: 17px
+            }
+
+            .nav-scroll {
+                min-height: 38px;
+                padding: 8px;
+                font-size: 12px
+            }
+
+            .sound-btn {
+                width: 38px;
+                height: 38px
+            }
+
+            .how,
+            .upload-section,
+            .gallery-section,
+            .messages-section,
+            .game-section {
+                padding: 58px 12px 64px
+            }
+
+            .how {
+                border-radius: 28px 28px 0 0
+            }
+
+            .how h2,
+            .upload-section h2,
+            .gallery-section h2,
+            .messages-section h2,
+            .game-section h2 {
+                font-size: clamp(36px, 11vw, 52px)
+            }
+
+            .section-lead {
+                font-size: 14px
+            }
+
+            .steps {
+                gap: 11px
+            }
+
+            .steps article {
+                padding: 19px
+            }
+
+            .steps h3 {
+                font-size: 25px
+            }
+
+            .upload-card {
+                padding: 10px;
+                border-radius: 20px
+            }
+
+            .dropzone {
+                min-height: 150px
+            }
+
+            .upload-footer {
+                gap: 12px
+            }
+
+            .gallery {
+                gap: 8px
+            }
+
+            .media-thumb {
+                height: 145px
+            }
+
+            .media-meta {
+                padding: 8px
+            }
+
+            .media-meta b {
+                font-size: 11px
+            }
+
+            .media-meta p {
+                font-size: 10px
+            }
+
+            .message-card {
+                padding: 18px
+            }
+
+            .game-overlay {
+                padding: 15px
+            }
+
+            .game-overlay h3 {
+                font-size: 23px
+            }
+
+            .game-icon {
+                font-size: 48px
+            }
+
+            .game-wrap:fullscreen canvas {
+                width: min(100vw, calc(100dvh * 800 / 460))
+            }
+
+            .game-wrap:fullscreen .game-controls {
+                padding: 0 16px;
+                bottom: 20px
+            }
+
+            .game-wrap:fullscreen .game-control-btn {
+                width: 76px;
+                height: 64px;
+                font-size: 32px
+            }
+
+            .game-wrap:fullscreen .game-hud {
+                top: 14px;
+                left: 14px;
+                right: 14px
+            }
+        }
+
+        @media (max-width:360px) {
+
+            .brand strong {
+                font-size: 15px
+            }
+
+            .brand b {
+                display: none
+            }
+
+            .nav-scroll {
+                font-size: 0;
+                width: 36px;
+                padding: 0;
+                display: grid;
+                place-items: center
+            }
+
+            .nav-scroll[data-scroll="album"]::before {
+                content: "📸";
+                font-size: 17px
+            }
+
+            .nav-scroll[data-scroll="mensagens"]::before {
+                content: "💌";
+                font-size: 17px
+            }
+
+            .nav-scroll[data-scroll="jogo"]::before {
+                content: "🚀";
+                font-size: 17px
+            }
+
+            .hero {
+                padding-left: 10px;
+                padding-right: 10px
+            }
+
+            .hero h1 {
+                font-size: 47px
+            }
+
+            .mission-stats {
+                gap: 14px
+            }
+
+            .mission-stats b {
+                font-size: 24px
+            }
+
+            .mission-stats span {
+                font-size: 7px
+            }
+
+            .gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr))
+            }
+
+            .media-thumb {
+                height: 132px
+            }
+
+            .game-control-btn {
+                width: 58px;
+                height: 50px
+            }
+        }
+
+        @media (prefers-reduced-motion:reduce) {
+
+            html {
+                scroll-behavior: auto
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: .01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: .01ms !important
+            }
+        }
+    </style>
 </head>
+
+
 <body>
 
+    <!-- ============================================================
+       ELEMENTOS ESPACIAIS
+  ============================================================ -->
 
-  <script>
-    const links = [
-      "https://script.google.com/macros/s/AKfycbwJ-y3PNbFBDUCXwiy2O_ZTMofXs2UOjCtS6bPMNbqiDRkqk7DRU_8qpKUgLc8ydQbVPw/exec"
-    ];
+    <div id="stars" class="stars" aria-hidden="true"></div>
 
-    function redirecionar() {
-      const indice = Math.floor(Math.random() * links.length);
-      window.location.href = links[indice];
-    }
-    redirecionar();
-  </script>
+    <div class="shooting-star s1" aria-hidden="true"></div>
+    <div class="shooting-star s2" aria-hidden="true"></div>
+
+
+    <!-- ============================================================
+       HEADER
+  ============================================================ -->
+
+    <header class="topbar">
+
+        <button class="brand scroll-btn" type="button" data-scroll="inicio" aria-label="Missão Espaço">
+
+            <span class="brand-planet">🪐</span>
+
+            <span>
+                <b>MISSÃO</b>
+                <strong>ESPAÇO</strong>
+            </span>
+
+        </button>
+
+
+        <nav>
+
+            <button class="nav-scroll scroll-btn" type="button" data-scroll="album">
+                📸 Álbum
+            </button>
+
+
+            <button class="nav-scroll scroll-btn" type="button" data-scroll="mensagens">
+                💌 Mensagens
+            </button>
+
+
+            <button class="nav-scroll scroll-btn" type="button" data-scroll="jogo">
+                🚀 Joguinho
+            </button>
+
+
+            <button class="sound-btn" id="soundBtn" type="button" title="Ativar/desativar efeitos"
+                aria-label="Ativar ou desativar efeitos">
+
+                🔊
+
+            </button>
+
+        </nav>
+
+    </header>
+
+
+    <!-- ============================================================
+       CONTEÚDO
+  ============================================================ -->
+
+    <main>
+
+
+        <!-- ========================================================
+         HERO
+    ======================================================== -->
+
+        <section id="inicio" class="hero">
+
+            <div class="planet planet-left" aria-hidden="true">
+                🌙
+            </div>
+
+
+            <div class="hero-content">
+
+                <div class="mission-badge">
+                    🚀 TRANSMISSÃO DA MISSÃO • AO VIVO
+                </div>
+
+
+                <h1>
+                    Registre esse<br>
+                    <span>momento especial!</span>
+                </h1>
+
+
+                <p>
+                    Apontou a câmera? Então decola!
+                    Compartilhe fotos, vídeos e mensagens
+                    e faça parte do nosso álbum espacial. ✨
+                </p>
+
+
+                <div class="hero-actions">
+
+                    <button class="btn btn-primary scroll-btn" type="button" data-scroll="enviar">
+                        📸 Enviar lembrança
+                    </button>
+
+
+                    <button class="btn btn-ghost scroll-btn" type="button" data-scroll="album">
+                        🌎 Ver o álbum
+                    </button>
+
+                </div>
+
+
+                <div class="mission-stats">
+
+                    <div>
+                        <b id="photoCount">0</b>
+                        <span>lembranças</span>
+                    </div>
+
+                    <div>
+                        <b>∞</b>
+                        <span>estrelas</span>
+                    </div>
+
+                    <div>
+                        <b>1</b>
+                        <span>missão</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ====================================================
+           ASTRONAUTA
+      ==================================================== -->
+
+            <div class="astronaut" aria-hidden="true">
+
+                <div class="astronaut-glow"></div>
+
+
+                <div class="helmet">
+
+                    <div class="visor"></div>
+
+                    <i></i>
+                    <i></i>
+
+                </div>
+
+
+                <div class="body-suit">
+
+                    <span class="control">
+                        ●<br>
+                        ▣
+                    </span>
+
+                </div>
+
+
+                <div class="arm arm-a"></div>
+                <div class="arm arm-b"></div>
+
+                <div class="leg leg-a"></div>
+                <div class="leg leg-b"></div>
+
+                <div class="jet">
+                    🔥
+                </div>
+
+            </div>
+
+
+            <div class="orbit orbit-one" aria-hidden="true"></div>
+
+            <div class="orbit orbit-two" aria-hidden="true"></div>
+
+        </section>
+
+
+        <!-- ========================================================
+         COMO PARTICIPAR
+    ======================================================== -->
+
+        <section class="how">
+
+            <div class="section-kicker">
+                🛰️ CENTRAL DE COMANDO
+            </div>
+
+
+            <h2>
+                Como participar da missão?
+            </h2>
+
+
+            <div class="steps">
+
+                <article>
+
+                    <span>01</span>
+
+                    <h3>
+                        Capture
+                    </h3>
+
+                    <p>
+                        Faça uma foto ou grave um vídeo
+                        desse dia incrível.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <span>02</span>
+
+                    <h3>
+                        Envie
+                    </h3>
+
+                    <p>
+                        Envie só uma foto/vídeo,
+                        só uma mensagem ou os dois juntos.
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <span>03</span>
+
+                    <h3>
+                        Explore
+                    </h3>
+
+                    <p>
+                        Veja as lembranças de todo mundo
+                        e reviva a festa.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================
+         ENVIO
+    ======================================================== -->
+
+        <section id="enviar" class="upload-section">
+
+            <div class="section-kicker">
+                📡 TRANSMISSÃO DE DADOS
+            </div>
+
+
+            <h2>
+                Envie sua lembrança
+            </h2>
+
+
+            <p class="section-lead">
+                Envie só uma foto, só um vídeo,
+                só uma mensagem ou combine arquivo + mensagem.
+                O sistema identifica tudo automaticamente.
+            </p>
+
+
+            <form id="uploadForm" class="upload-card">
+
+
+                <label class="dropzone" id="dropzone" for="fileInput">
+
+                    <input id="fileInput" name="file" type="file" accept="image/*,video/*">
+
+
+                    <div class="upload-icon">
+                        🚀
+                    </div>
+
+
+                    <strong id="fileLabel">
+                        Clique ou arraste seu arquivo aqui
+                    </strong>
+
+
+                    <small id="fileHint">
+                        JPG, PNG, WEBP ou vídeo •
+                        fotos até 25 MB •
+                        vídeos até 50 MB
+                    </small>
+
+                </label>
+
+
+                <div class="form-grid">
+
+                    <label>
+
+                        <span>
+                            Seu nome
+                            <small class="optional">
+                                (opcional)
+                            </small>
+                        </span>
+
+
+                        <input id="author" name="author" type="text" maxlength="50" placeholder="Ex.: Tio Lucas">
+
+                    </label>
+
+                </div>
+
+
+                <label>
+
+                    <span>
+                        Mensagem
+                        <small class="optional">
+                            (opcional)
+                        </small>
+                    </span>
+
+
+                    <textarea id="message" name="message" maxlength="500" rows="4"
+                        placeholder="Deixe uma mensagem para o aniversariante... Se enviar uma foto ou vídeo, ela ficará vinculada à lembrança."></textarea>
+
+                </label>
+
+
+                <div class="upload-footer">
+
+                    <div class="privacy-note">
+
+                        🔒 Seu arquivo será guardado
+                        no Drive configurado pelo anfitrião.
+
+                    </div>
+
+
+                    <button class="btn btn-primary" type="submit" id="sendBtn">
+
+                        🚀 Enviar para o espaço
+
+                    </button>
+
+                </div>
+
+
+                <div class="progress-wrap" id="progressWrap">
+
+                    <div id="progressBar"></div>
+
+                </div>
+
+
+                <p class="form-status" id="formStatus" role="status"></p>
+
+            </form>
+
+        </section>
+
+
+        <!-- ========================================================
+         ÁLBUM
+    ======================================================== -->
+
+        <section id="album" class="gallery-section">
+
+
+            <div class="section-heading">
+
+                <div>
+
+                    <div class="section-kicker">
+                        🌌 ÁLBUM DA GALÁXIA
+                    </div>
+
+                    <h2>
+                        Momentos em órbita
+                    </h2>
+
+                </div>
+
+
+                <button class="btn btn-small" id="refreshBtn" type="button">
+
+                    ↻ Atualizar
+
+                </button>
+
+            </div>
+
+
+            <div id="gallery" class="gallery">
+
+                <div class="loading-card">
+
+                    <div class="loader"></div>
+
+                    <p>
+                        Buscando lembranças na estação...
+                    </p>
+
+                    <small>
+                        Conectando ao Google Drive...
+                    </small>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================
+         MENSAGENS
+    ======================================================== -->
+
+        <section id="mensagens" class="messages-section">
+
+
+            <div class="section-kicker">
+                💌 CÁPSULAS DO TEMPO
+            </div>
+
+
+            <h2>
+                Mensagens para guardar
+            </h2>
+
+
+            <div id="messageWall" class="message-wall">
+
+                <p class="empty-state">
+                    As mensagens enviadas aparecerão aqui. ✨
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- ========================================================
+         JOGO
+    ======================================================== -->
+
+        <section id="jogo" class="game-section">
+
+
+            <div class="section-kicker">
+                🎮 TREINAMENTO DE ASTRONAUTA
+            </div>
+
+
+            <h2>
+                Desvie dos meteoros!
+            </h2>
+
+
+            <p class="section-lead">
+                Use ← → ou A/D.
+                Pegue as estrelas e sobreviva
+                o máximo que puder.
+            </p>
+
+
+            <button class="btn btn-primary game-launch" id="fullscreenGame" type="button">
+
+                🚀 JOGAR EM TELA CHEIA
+
+            </button>
+
+
+            <div class="game-wrap" id="gameWrap">
+
+
+                <canvas id="gameCanvas" width="800" height="460" aria-label="Jogo de astronauta">
+                </canvas>
+
+
+                <div class="game-overlay" id="gameOverlay">
+
+                    <div class="game-icon">
+                        🚀
+                    </div>
+
+
+                    <h3>
+                        Pronto para decolar?
+                    </h3>
+
+
+                    <button class="btn btn-primary" id="startGame" type="button">
+
+                        Iniciar missão
+
+                    </button>
+
+                </div>
+
+
+                <div class="game-hud">
+
+                    <span>
+                        ⭐ <b id="score">0</b>
+                    </span>
+
+                    <span>
+                        ❤️ <b id="lives">3</b>
+                    </span>
+
+                    <span>
+                        🏆 <b id="best">0</b>
+                    </span>
+
+                </div>
+
+
+                <div class="game-controls" aria-label="Controles do jogo">
+
+
+                    <button class="game-control-btn" id="moveLeft" type="button" aria-label="Mover para a esquerda">
+
+                        ◀
+
+                    </button>
+
+
+                    <button class="game-control-btn" id="moveRight" type="button" aria-label="Mover para a direita">
+
+                        ▶
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ============================================================
+       FOOTER
+  ============================================================ -->
+
+    <footer>
+
+        <div class="footer-rocket">
+            🚀
+        </div>
+
+
+        <h2>
+            Até a próxima missão! 🌟
+        </h2>
+
+
+        <p>
+            Feito com carinho para transformar lembranças
+            em uma viagem pelo espaço.
+        </p>
+
+
+        <small>
+            Álbum espacial • Alpha LFN
+        </small>
+
+    </footer>
+
+
+    <!-- ============================================================
+       MODAL
+  ============================================================ -->
+
+    <div class="modal" id="mediaModal" aria-hidden="true">
+
+
+        <div class="modal-backdrop" data-close>
+        </div>
+
+
+        <div class="modal-box">
+
+            <button class="modal-close" data-close aria-label="Fechar">
+
+                ×
+
+            </button>
+
+
+            <div id="modalContent"></div>
+
+
+            <div class="modal-caption" id="modalCaption">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ============================================================
+       JAVASCRIPT
+       GITHUB PAGES → GOOGLE APPS SCRIPT API
+  ============================================================ -->
+
+    <script>
+
+        // ============================================================
+        // API DO GOOGLE APPS SCRIPT
+        // ============================================================
+
+        const API_URL =
+            "https://script.google.com/macros/s/AKfycbwOjSxNMlML0QzZ-LMLkH1-Fyq09A3_Rk67E2_q5BsoTjevbKHtyo4IS820NT--_yMH9g/exec";
+
+
+        // ============================================================
+        // FUNÇÃO GET DA API
+        // ============================================================
+
+        async function apiGet(action) {
+
+            const separator =
+                API_URL.includes("?")
+                    ? "&"
+                    : "?";
+
+            const url =
+                `${API_URL}${separator}api=1&action=${encodeURIComponent(action)}&t=${Date.now()}`;
+
+
+            const response =
+                await fetch(
+                    url,
+                    {
+                        method: "GET",
+                        cache: "no-store"
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Erro HTTP ${response.status} ao acessar a API.`
+                );
+            }
+
+
+            let result;
+
+            try {
+
+                result =
+                    await response.json();
+
+            } catch (error) {
+
+                throw new Error(
+                    "O Apps Script não retornou um JSON válido."
+                );
+            }
+
+
+            if (
+                !result ||
+                result.success !== true
+            ) {
+
+                throw new Error(
+                    result?.error ||
+                    "Resposta inválida do servidor."
+                );
+            }
+
+
+            return result;
+        }
+
+
+        // ============================================================
+        // FUNÇÃO POST DA API
+        // ============================================================
+
+        async function apiPost(payload) {
+
+            const response =
+                await fetch(
+                    API_URL,
+                    {
+                        method: "POST",
+
+                        headers: {
+                            "Content-Type":
+                                "text/plain;charset=UTF-8"
+                        },
+
+                        body:
+                            JSON.stringify(
+                                payload
+                            )
+                    }
+                );
+
+
+            if (!response.ok) {
+
+                throw new Error(
+                    `Erro HTTP ${response.status} ao enviar os dados.`
+                );
+            }
+
+
+            let result;
+
+            try {
+
+                result =
+                    await response.json();
+
+            } catch (error) {
+
+                throw new Error(
+                    "O Apps Script não retornou um JSON válido."
+                );
+            }
+
+
+            if (
+                !result ||
+                result.success !== true
+            ) {
+
+                throw new Error(
+                    result?.error ||
+                    "Resposta inválida do servidor."
+                );
+            }
+
+
+            return result;
+        }
+
+
+        // ============================================================
+        // CONVERTER ARQUIVO PARA BASE64
+        // ============================================================
+
+        function fileToBase64(file) {
+
+            return new Promise(
+                (resolve, reject) => {
+
+                    const reader =
+                        new FileReader();
+
+
+                    reader.onload =
+                        () => {
+
+                            try {
+
+                                const result =
+                                    String(
+                                        reader.result ||
+                                        ""
+                                    );
+
+
+                                const comma =
+                                    result.indexOf(",");
+
+
+                                const base64 =
+                                    comma >= 0
+                                        ? result.slice(
+                                            comma + 1
+                                        )
+                                        : result;
+
+
+                                resolve(
+                                    base64
+                                );
+
+                            } catch (error) {
+
+                                reject(
+                                    error
+                                );
+
+                            }
+
+                        };
+
+
+                    reader.onerror =
+                        () => {
+
+                            reject(
+                                new Error(
+                                    "Não foi possível ler o arquivo."
+                                )
+                            );
+
+                        };
+
+
+                    reader.onabort =
+                        () => {
+
+                            reject(
+                                new Error(
+                                    "A leitura do arquivo foi cancelada."
+                                )
+                            );
+
+                        };
+
+
+                    reader.readAsDataURL(
+                        file
+                    );
+
+                }
+            );
+        }
+
+
+        // ============================================================
+        // NAVEGAÇÃO INTERNA
+        // ============================================================
+
+        function scrollToSection(id) {
+
+            const target =
+                document.getElementById(
+                    id
+                );
+
+
+            if (!target)
+                return;
+
+
+            target.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+        }
+
+
+        document
+            .querySelectorAll(
+                ".scroll-btn[data-scroll]"
+            )
+            .forEach(
+                button => {
+
+                    button.addEventListener(
+                        "click",
+                        event => {
+
+                            event.preventDefault();
+                            event.stopPropagation();
+
+
+                            scrollToSection(
+                                button.dataset.scroll
+                            );
+
+                        }
+                    );
+
+                }
+            );
+
+
+        // ============================================================
+        // ELEMENTOS
+        // ============================================================
+
+        const $ =
+            s =>
+                document.querySelector(s);
+
+
+        const gallery =
+            $("#gallery");
+
+
+        const messageWall =
+            $("#messageWall");
+
+
+        const uploadForm =
+            $("#uploadForm");
+
+
+        const fileInput =
+            $("#fileInput");
+
+
+        const dropzone =
+            $("#dropzone");
+
+
+        const fileLabel =
+            $("#fileLabel");
+
+
+        const statusEl =
+            $("#formStatus");
+
+
+        const progressWrap =
+            $("#progressWrap");
+
+
+        const progressBar =
+            $("#progressBar");
+
+
+        let mediaCache =
+            [];
+
+
+        // ============================================================
+        // ESCAPE HTML
+        // ============================================================
+
+        function escapeHtml(
+            value = ""
+        ) {
+
+            return String(value).replace(
+                /[&<>"']/g,
+                c => ({
+                    "&": "&amp;",
+                    "<": "&lt;",
+                    ">": "&gt;",
+                    '"': "&quot;",
+                    "'": "&#039;"
+                }[c])
+            );
+
+        }
+
+
+        // ============================================================
+        // DATA
+        // ============================================================
+
+        function formatDate(
+            value
+        ) {
+
+            if (!value)
+                return "";
+
+
+            const d =
+                new Date(value);
+
+
+            return Number.isNaN(
+                d.getTime()
+            )
+                ? ""
+                : d.toLocaleDateString(
+                    "pt-BR",
+                    {
+                        day: "2-digit",
+                        month: "short"
+                    }
+                );
+
+        }
+
+
+        // ============================================================
+        // STATUS
+        // ============================================================
+
+        function showStatus(
+            text,
+            type = ""
+        ) {
+
+            statusEl.textContent =
+                text;
+
+
+            statusEl.className =
+                "form-status " +
+                type;
+
+        }
+
+
+        // ============================================================
+        // PROGRESSO
+        // ============================================================
+
+        function setProgress(
+            p
+        ) {
+
+            progressWrap.classList.add(
+                "active"
+            );
+
+
+            progressBar.style.width =
+                `${Math.max(
+                    0,
+                    Math.min(
+                        100,
+                        p
+                    )
+                )}%`;
+
+        }
+
+
+        // ============================================================
+        // ARQUIVO SELECIONADO
+        // ============================================================
+
+        fileInput.addEventListener(
+            "change",
+            () => {
+
+                const file =
+                    fileInput.files[0];
+
+
+                if (!file) {
+
+                    fileLabel.textContent =
+                        "Clique ou arraste seu arquivo aqui";
+
+                    return;
+                }
+
+
+                const detectedType =
+                    file.type.startsWith(
+                        "image/"
+                    )
+                        ? "foto"
+                        : file.type.startsWith(
+                            "video/"
+                        )
+                            ? "video"
+                            : "arquivo";
+
+
+                fileLabel.textContent =
+                    detectedType === "foto"
+                        ? `📸 Foto detectada: ${file.name}`
+                        : detectedType === "video"
+                            ? `🎥 Vídeo detectado: ${file.name}`
+                            : `📎 ${file.name}`;
+
+            }
+        );
+
+
+        // ============================================================
+        // DRAG AND DROP
+        // ============================================================
+
+        [
+            "dragenter",
+            "dragover"
+        ].forEach(
+            evt => {
+
+                dropzone.addEventListener(
+                    evt,
+                    e => {
+
+                        e.preventDefault();
+
+                        dropzone.classList.add(
+                            "drag"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        [
+            "dragleave",
+            "drop"
+        ].forEach(
+            evt => {
+
+                dropzone.addEventListener(
+                    evt,
+                    e => {
+
+                        e.preventDefault();
+
+                        dropzone.classList.remove(
+                            "drag"
+                        );
+
+                    }
+                );
+
+            }
+        );
+
+
+        dropzone.addEventListener(
+            "drop",
+            e => {
+
+                const files =
+                    e.dataTransfer.files;
+
+
+                if (!files.length)
+                    return;
+
+
+                try {
+
+                    fileInput.files =
+                        files;
+
+                } catch (_) { }
+
+
+                const file =
+                    files[0];
+
+
+                fileLabel.textContent =
+                    file.type.startsWith(
+                        "image/"
+                    )
+                        ? `📸 Foto detectada: ${file.name}`
+                        : file.type.startsWith(
+                            "video/"
+                        )
+                            ? `🎥 Vídeo detectado: ${file.name}`
+                            : `📎 ${file.name}`;
+
+            }
+        );
+
+
+        // ============================================================
+        // ENVIO DA LEMBRANÇA
+        // ============================================================
+
+        uploadForm.addEventListener(
+            "submit",
+            async e => {
+
+                e.preventDefault();
+
+
+                const file =
+                    fileInput.files[0] ||
+                    null;
+
+
+                const author =
+                    $("#author")
+                        .value
+                        .trim() ||
+                    "Visitante";
+
+
+                const message =
+                    $("#message")
+                        .value
+                        .trim();
+
+
+                let type =
+                    "mensagem";
+
+
+                // --------------------------------------------------------
+                // IDENTIFICAR TIPO
+                // --------------------------------------------------------
+
+                if (file) {
+
+                    if (
+                        file.type.startsWith(
+                            "image/"
+                        )
+                    ) {
+
+                        type =
+                            "foto";
+
+                    } else if (
+                        file.type.startsWith(
+                            "video/"
+                        )
+                    ) {
+
+                        type =
+                            "video";
+
+                    } else {
+
+                        showStatus(
+                            "Esse arquivo não é uma foto ou vídeo compatível.",
+                            "error"
+                        );
+
+                        return;
+                    }
+
+                }
+
+
+                // --------------------------------------------------------
+                // VALIDAR CAMPOS
+                // --------------------------------------------------------
+
+                if (
+                    !file &&
+                    !message
+                ) {
+
+                    showStatus(
+                        "Escolha uma foto ou vídeo, ou escreva uma mensagem.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                // --------------------------------------------------------
+                // LIMITE FOTO
+                // --------------------------------------------------------
+
+                if (
+                    file &&
+                    type === "foto" &&
+                    file.size >
+                    25 * 1024 * 1024
+                ) {
+
+                    showStatus(
+                        "Essa foto passa do limite de 25 MB.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                // --------------------------------------------------------
+                // LIMITE VÍDEO
+                // --------------------------------------------------------
+
+                if (
+                    file &&
+                    type === "video" &&
+                    file.size >
+                    50 * 1024 * 1024
+                ) {
+
+                    showStatus(
+                        "Esse vídeo passa do limite de 50 MB.",
+                        "error"
+                    );
+
+                    return;
+                }
+
+
+                const btn =
+                    $("#sendBtn");
+
+
+                btn.disabled =
+                    true;
+
+
+                btn.textContent =
+                    "🛰️ Transmitindo...";
+
+
+                setProgress(
+                    10
+                );
+
+
+                let completed =
+                    false;
+
+
+                let timeoutId =
+                    null;
+
+
+                const finishUI =
+                    () => {
+
+                        btn.disabled =
+                            false;
+
+
+                        btn.textContent =
+                            "🚀 Enviar para o espaço";
+
+
+                        if (timeoutId)
+                            clearTimeout(
+                                timeoutId
+                            );
+
+                    };
+
+
+                const failUI =
+                    (
+                        prefix,
+                        error
+                    ) => {
+
+                        console.error(
+                            prefix,
+                            error
+                        );
+
+
+                        finishUI();
+
+
+                        progressWrap.classList.remove(
+                            "active"
+                        );
+
+
+                        progressBar.style.width =
+                            "0";
+
+
+                        const detail =
+                            error &&
+                                error.message
+                                ? error.message
+                                : String(
+                                    error ||
+                                    "Erro desconhecido."
+                                );
+
+
+                        showStatus(
+                            detail,
+                            "error"
+                        );
+
+                    };
+
+
+                // ========================================================
+                // SOMENTE TEXTO
+                // ========================================================
+
+                if (!file) {
+
+                    showStatus(
+                        "💌 Salvando sua mensagem..."
+                    );
+
+
+                    setProgress(
+                        35
+                    );
+
+
+                    timeoutId =
+                        setTimeout(
+                            () => {
+
+                                if (completed)
+                                    return;
+
+
+                                completed =
+                                    true;
+
+
+                                failUI(
+                                    "save_message timeout:",
+                                    new Error(
+                                        "O Google Apps Script demorou mais de 45 segundos para salvar a mensagem."
+                                    )
+                                );
+
+                            },
+                            45000
+                        );
+
+
+                    try {
+
+                        const result =
+                            await apiPost({
+
+                                action:
+                                    "save_message",
+
+                                author:
+                                    author,
+
+                                message:
+                                    message
+
+                            });
+
+
+                        if (completed)
+                            return;
+
+
+                        completed =
+                            true;
+
+
+                        setProgress(
+                            100
+                        );
+
+
+                        showStatus(
+                            "💌 Mensagem enviada com sucesso! Obrigado por participar da missão.",
+                            "success"
+                        );
+
+
+                        uploadForm.reset();
+
+
+                        fileLabel.textContent =
+                            "Clique ou arraste seu arquivo aqui";
+
+
+                        finishUI();
+
+
+                        loadContent();
+
+
+                        setTimeout(
+                            () => {
+
+                                progressWrap.classList.remove(
+                                    "active"
+                                );
+
+                                progressBar.style.width =
+                                    "0";
+
+                            },
+                            900
+                        );
+
+
+                    } catch (error) {
+
+                        if (completed)
+                            return;
+
+
+                        completed =
+                            true;
+
+
+                        failUI(
+                            "save_message:",
+                            error
+                        );
+
+                    }
+
+
+                    return;
+                }
+
+
+                // ========================================================
+                // FOTO / VÍDEO
+                // ========================================================
+
+                showStatus(
+                    message
+                        ? (
+                            type === "foto"
+                                ? "📸 Preparando foto + mensagem..."
+                                : "🎥 Preparando vídeo + mensagem..."
+                        )
+                        : (
+                            type === "foto"
+                                ? "📸 Preparando sua foto..."
+                                : "🎥 Preparando seu vídeo..."
+                        )
+                );
+
+
+                setProgress(
+                    20
+                );
+
+
+                timeoutId =
+                    setTimeout(
+                        () => {
+
+                            if (completed)
+                                return;
+
+
+                            completed =
+                                true;
+
+
+                            failUI(
+                                "upload timeout:",
+                                new Error(
+                                    "O Google Apps Script não respondeu em 5 minutos. O arquivo pode ter sido enviado mesmo assim; confira o Google Drive antes de tentar novamente."
+                                )
+                            );
+
+                        },
+                        5 * 60 * 1000
+                    );
+
+
+                try {
+
+                    // ------------------------------------------------------
+                    // LER ARQUIVO
+                    // ------------------------------------------------------
+
+                    showStatus(
+                        type === "foto"
+                            ? "📸 Preparando sua foto..."
+                            : "🎥 Preparando seu vídeo..."
+                    );
+
+
+                    setProgress(
+                        25
+                    );
+
+
+                    const base64 =
+                        await fileToBase64(
+                            file
+                        );
+
+
+                    if (completed)
+                        return;
+
+
+                    setProgress(
+                        55
+                    );
+
+
+                    showStatus(
+                        message
+                            ? (
+                                type === "foto"
+                                    ? "📸 Enviando foto + mensagem..."
+                                    : "🎥 Enviando vídeo + mensagem..."
+                            )
+                            : (
+                                type === "foto"
+                                    ? "📸 Enviando sua foto..."
+                                    : "🎥 Enviando seu vídeo..."
+                            )
+                    );
+
+
+                    // ------------------------------------------------------
+                    // ENVIAR PARA APPS SCRIPT
+                    // ------------------------------------------------------
+
+                    const result =
+                        await apiPost({
+
+                            action:
+                                "upload",
+
+                            fileName:
+                                file.name,
+
+                            mimeType:
+                                file.type,
+
+                            author:
+                                author,
+
+                            message:
+                                message,
+
+                            type:
+                                type,
+
+                            data:
+                                base64
+
+                        });
+
+
+                    if (completed)
+                        return;
+
+
+                    completed =
+                        true;
+
+
+                    setProgress(
+                        100
+                    );
+
+
+                    showStatus(
+                        message
+                            ? "🚀 Lembrança e mensagem enviadas com sucesso! Obrigado por participar da missão."
+                            : "🚀 Lembrança enviada com sucesso! Obrigado por participar da missão.",
+                        "success"
+                    );
+
+
+                    uploadForm.reset();
+
+
+                    fileLabel.textContent =
+                        "Clique ou arraste seu arquivo aqui";
+
+
+                    finishUI();
+
+
+                    setTimeout(
+                        () => {
+
+                            loadContent();
+
+                        },
+                        250
+                    );
+
+
+                    setTimeout(
+                        () => {
+
+                            progressWrap.classList.remove(
+                                "active"
+                            );
+
+                            progressBar.style.width =
+                                "0";
+
+                        },
+                        1200
+                    );
+
+
+                } catch (error) {
+
+                    if (completed)
+                        return;
+
+
+                    completed =
+                        true;
+
+
+                    failUI(
+                        "upload:",
+                        error
+                    );
+
+                }
+
+            }
+        );
+
+
+        // ============================================================
+        // CARREGAR CONTEÚDO
+        // ============================================================
+
+        async function loadContent() {
+
+            gallery.innerHTML = `
+        <div class="loading-card">
+          <div class="loader"></div>
+          <p>Buscando lembranças na estação...</p>
+          <small>Conectando ao Google Drive...</small>
+        </div>
+      `;
+
+
+            messageWall.innerHTML = `
+        <div class="loading-card">
+          <div class="loader"></div>
+          <p>Buscando mensagens...</p>
+        </div>
+      `;
+
+
+            let finished =
+                false;
+
+
+            const timeout =
+                setTimeout(
+                    () => {
+
+                        if (finished)
+                            return;
+
+
+                        finished =
+                            true;
+
+
+                        gallery.innerHTML = `
+              <div class="empty-state">
+
+                ⚠️ O Google Apps Script
+                não respondeu a tempo.
+
+                <br>
+
+                <small>
+                  Isso normalmente indica publicação antiga,
+                  autorização pendente ou acesso negado
+                  às pastas do Google Drive.
+                </small>
+
+                <br><br>
+
+                <button
+                  class="btn btn-small"
+                  type="button"
+                  onclick="loadContent()">
+
+                  ↻ Tentar novamente
+
+                </button>
+
+              </div>
+            `;
+
+
+                        messageWall.innerHTML = `
+              <p class="empty-state">
+                Não foi possível carregar as mensagens.
+              </p>
+            `;
+
+                    },
+                    15000
+                );
+
+
+            try {
+
+                // ========================================================
+                // CARREGAR MÍDIA
+                // ========================================================
+
+                const result =
+                    await apiGet(
+                        "media"
+                    );
+
+
+                if (finished)
+                    return;
+
+
+                finished =
+                    true;
+
+
+                clearTimeout(
+                    timeout
+                );
+
+
+                if (
+                    !result ||
+                    result.success !== true
+                ) {
+
+                    throw new Error(
+                        "Resposta inválida do servidor."
+                    );
+
+                }
+
+
+                const photos =
+                    Array.isArray(
+                        result.photos
+                    )
+                        ? result.photos
+                        : [];
+
+
+                const videos =
+                    Array.isArray(
+                        result.videos
+                    )
+                        ? result.videos
+                        : [];
+
+
+                mediaCache = [
+
+                    ...photos.map(
+                        item => ({
+                            ...item,
+                            type: "foto",
+                            mimeType:
+                                item.mimeType ||
+                                "image/*"
+                        })
+                    ),
+
+                    ...videos.map(
+                        item => ({
+                            ...item,
+                            type: "video",
+                            mimeType:
+                                item.mimeType ||
+                                "video/*"
+                        })
+                    )
+
+                ];
+
+
+                renderGallery(
+                    mediaCache
+                );
+
+
+                const errors =
+                    result.errors ||
+                    {};
+
+
+                if (
+                    errors.photos ||
+                    errors.videos
+                ) {
+
+                    gallery.insertAdjacentHTML(
+                        "beforeend",
+                        `
+              <div class="empty-state">
+
+                ⚠️ Problema ao acessar o Drive.
+
+                <br>
+
+                <small>
+                  ${escapeHtml(
+                            errors.photos ||
+                            errors.videos
+                        )}
+                </small>
+
+              </div>
+            `
+                    );
+
+                }
+
+
+                // ========================================================
+                // CONTADOR
+                // ========================================================
+
+                const counter =
+                    $("#photoCount");
+
+
+                if (counter)
+                    counter.textContent =
+                        mediaCache.length;
+
+
+                // ========================================================
+                // CARREGAR MENSAGENS
+                // ========================================================
+
+                try {
+
+                    const messagesResult =
+                        await apiGet(
+                            "messages"
+                        );
+
+
+                    renderMessages(
+                        messagesResult &&
+                            messagesResult.success
+                            ? (
+                                messagesResult.messages ||
+                                []
+                            )
+                            : []
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "getMessages:",
+                        error
+                    );
+
+
+                    renderMessages(
+                        []
+                    );
+
+                }
+
+
+            } catch (error) {
+
+                if (finished)
+                    return;
+
+
+                finished =
+                    true;
+
+
+                clearTimeout(
+                    timeout
+                );
+
+
+                console.error(
+                    "getMediaData:",
+                    error
+                );
+
+
+                gallery.innerHTML = `
+          <div class="empty-state">
+
+            ⚠️ Não foi possível acessar
+            o Google Drive.
+
+            <br>
+
+            <small>
+              ${escapeHtml(
+                    error?.message ||
+                    String(
+                        error ||
+                        "Erro desconhecido"
+                    )
+                )}
+            </small>
+
+            <br><br>
+
+            <button
+              class="btn btn-small"
+              type="button"
+              onclick="loadContent()">
+
+              ↻ Tentar novamente
+
+            </button>
+
+          </div>
+        `;
+
+
+                renderMessages(
+                    []
+                );
+
+            }
+
+        }
+
+
+        // ============================================================
+        // URLS DAS MÍDIAS
+        // ============================================================
+
+        function getMediaUrl(
+            item
+        ) {
+
+            if (!item)
+                return "";
+
+
+            if (item.url)
+                return item.url;
+
+
+            if (item.webContentLink)
+                return item.webContentLink;
+
+
+            if (item.id) {
+
+                return `
+          https://drive.google.com/uc?export=view&id=${encodeURIComponent(
+                    item.id
+                )}
+        `;
+
+            }
+
+
+            return "";
+
+        }
+
+
+        function getImageUrl(
+            item,
+            large = false
+        ) {
+
+            if (!item)
+                return "";
+
+
+            if (
+                large &&
+                item.thumbnailLarge
+            )
+                return item.thumbnailLarge;
+
+
+            if (
+                !large &&
+                item.thumbnail
+            )
+                return item.thumbnail;
+
+
+            if (item.id) {
+
+                const size =
+                    large
+                        ? "w2000"
+                        : "w1200";
+
+
+                return `
+          https://drive.google.com/thumbnail?id=${encodeURIComponent(
+                    item.id
+                )}&sz=${size}
+        `;
+
+            }
+
+
+            return getMediaUrl(
+                item
+            );
+
+        }
+
+
+        // ============================================================
+        // GALERIA
+        // ============================================================
+
+        function renderGallery(
+            items
+        ) {
+
+            const media =
+                items.filter(
+                    x =>
+                        x.mimeType &&
+                        (
+                            x.mimeType.startsWith(
+                                "image/"
+                            ) ||
+                            x.mimeType.startsWith(
+                                "video/"
+                            )
+                        )
+                );
+
+
+            if (!media.length) {
+
+                gallery.innerHTML = `
+          <div class="empty-state">
+
+            🌌 Ainda não há
+            lembranças aqui.
+
+            <br>
+
+            Seja o primeiro astronauta
+            a enviar uma!
+
+          </div>
+        `;
+
+                return;
+            }
+
+
+            gallery.innerHTML =
+                media.map(
+                    (item, i) => {
+
+                        const isVideo =
+                            item.mimeType.startsWith(
+                                "video/"
+                            );
+
+
+                        const mediaUrl =
+                            getMediaUrl(
+                                item
+                            );
+
+
+                        const imageUrl =
+                            getImageUrl(
+                                item
+                            );
+
+
+                        return `
+              <article
+                class="media-card"
+                data-index="${i}">
+
+                <div class="media-thumb">
+
+                  ${isVideo
+                                ? `
+                        <video
+                          src="${escapeHtml(mediaUrl)}"
+                          muted
+                          preload="metadata">
+                        </video>
+
+                        <span class="play">
+                          ▶
+                        </span>
+                      `
+                                : `
+                        <img
+                          src="${escapeHtml(imageUrl)}"
+                          alt="${escapeHtml(
+                                    item.message ||
+                                    "Foto da festa"
+                                )}"
+                          loading="lazy">
+                      `
+                            }
+
+                </div>
+
+
+                <div class="media-meta">
+
+                  <b>
+
+                    ${escapeHtml(
+                                item.author ||
+                                "Visitante"
+                            )}
+
+                    ${isVideo
+                                ? "🎥"
+                                : "📸"
+                            }
+
+                  </b>
+
+
+                  <p>
+
+                    ${escapeHtml(
+                                item.message ||
+                                (
+                                    "Uma lembrança da missão • " +
+                                    formatDate(
+                                        item.createdTime
+                                    )
+                                )
+                            )}
+
+                  </p>
+
+                </div>
+
+              </article>
+            `;
+
+                    }
+                ).join("");
+
+
+            gallery
+                .querySelectorAll(
+                    ".media-card"
+                )
+                .forEach(
+                    card => {
+
+                        card.addEventListener(
+                            "click",
+                            () => {
+
+                                openMedia(
+                                    media[
+                                    Number(
+                                        card.dataset.index
+                                    )
+                                    ]
+                                );
+
+                            }
+                        );
+
+                    }
+                );
+
+
+            gallery
+                .querySelectorAll(
+                    "img"
+                )
+                .forEach(
+                    img => {
+
+                        img.addEventListener(
+                            "error",
+                            () => {
+
+                                img.style.display =
+                                    "none";
+
+
+                                const holder =
+                                    img.parentElement;
+
+
+                                if (
+                                    holder &&
+                                    !holder.querySelector(
+                                        ".image-error"
+                                    )
+                                ) {
+
+                                    const notice =
+                                        document.createElement(
+                                            "div"
+                                        );
+
+
+                                    notice.className =
+                                        "image-error";
+
+
+                                    notice.innerHTML =
+                                        `
+                      📷
+
+                      <br>
+
+                      <small>
+                        Imagem não disponível publicamente
+                      </small>
+                    `;
+
+
+                                    holder.appendChild(
+                                        notice
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    }
+                );
+
+        }
+
+
+        // ============================================================
+        // MENSAGENS
+        // ============================================================
+
+        function renderMessages(
+            messages
+        ) {
+
+            if (!messages.length) {
+
+                messageWall.innerHTML = `
+          <p class="empty-state">
+
+            💌 Nenhuma mensagem
+            chegou ainda.
+
+            Deixe a primeira!
+
+          </p>
+        `;
+
+                return;
+            }
+
+
+            messageWall.innerHTML =
+                messages.map(
+                    item => `
+            <article class="message-card">
+
+              <p>
+                ${escapeHtml(
+                        item.message ||
+                        ""
+                    )}
+              </p>
+
+
+              <strong>
+
+                —
+                ${escapeHtml(
+                        item.author ||
+                        item.name ||
+                        "Visitante"
+                    )}
+
+                •
+
+                ${escapeHtml(
+                        formatDate(
+                            item.createdTime ||
+                            item.created_at
+                        )
+                    )}
+
+              </strong>
+
+            </article>
+          `
+                ).join("");
+
+        }
+
+
+        // ============================================================
+        // MODAL DE MÍDIA
+        // ============================================================
+
+        function openMedia(
+            item
+        ) {
+
+            const modal =
+                $("#mediaModal");
+
+
+            const content =
+                $("#modalContent");
+
+
+            const isVideo =
+                item.mimeType &&
+                item.mimeType.startsWith(
+                    "video/"
+                );
+
+
+            const mediaUrl =
+                getMediaUrl(
+                    item
+                );
+
+
+            const imageUrl =
+                getImageUrl(
+                    item,
+                    true
+                );
+
+
+            const caption =
+                `${item.author ||
+                "Visitante"
+                }${item.message
+                    ? " • " +
+                    item.message
+                    : ""
+                }`;
+
+
+            $("#modalCaption")
+                .textContent =
+                caption;
+
+
+            content.innerHTML =
+                `
+          <div class="modal-loading">
+            🚀 Abrindo lembrança...
+          </div>
+        `;
+
+
+            modal.classList.add(
+                "open"
+            );
+
+
+            modal.setAttribute(
+                "aria-hidden",
+                "false"
+            );
+
+
+            if (isVideo) {
+
+                content.innerHTML =
+                    `
+            <video
+              src="${escapeHtml(mediaUrl)}"
+              controls
+              autoplay
+              playsinline>
+            </video>
+          `;
+
+                return;
+            }
+
+
+            const img =
+                document.createElement(
+                    "img"
+                );
+
+
+            img.alt =
+                "Lembrança enviada";
+
+
+            img.loading =
+                "eager";
+
+
+            img.src =
+                imageUrl;
+
+
+            img.onerror =
+                () => {
+
+                    if (
+                        img.src !== mediaUrl &&
+                        mediaUrl
+                    ) {
+
+                        img.src =
+                            mediaUrl;
+
+                    } else {
+
+                        content.innerHTML =
+                            `
+                <div class="image-error modal-image-error">
+
+                  📷
+
+                  <br>
+
+                  <small>
+                    Não foi possível abrir esta imagem.
+                  </small>
+
+                </div>
+              `;
+
+                    }
+
+                };
+
+
+            content.innerHTML =
+                "";
+
+
+            content.appendChild(
+                img
+            );
+
+        }
+
+
+        // ============================================================
+        // FECHAR MODAL
+        // ============================================================
+
+        document
+            .querySelectorAll(
+                "[data-close]"
+            )
+            .forEach(
+                el => {
+
+                    el.addEventListener(
+                        "click",
+                        () => {
+
+                            $("#mediaModal")
+                                .classList
+                                .remove(
+                                    "open"
+                                );
+
+
+                            $("#mediaModal")
+                                .setAttribute(
+                                    "aria-hidden",
+                                    "true"
+                                );
+
+
+                            $("#modalContent")
+                                .innerHTML =
+                                "";
+
+                        }
+                    );
+
+                }
+            );
+
+
+        document.addEventListener(
+            "keydown",
+            e => {
+
+                if (
+                    e.key ===
+                    "Escape"
+                ) {
+
+                    $("#mediaModal")
+                        .classList
+                        .remove(
+                            "open"
+                        );
+
+
+                    $("#mediaModal")
+                        .setAttribute(
+                            "aria-hidden",
+                            "true"
+                        );
+
+
+                    $("#modalContent")
+                        .innerHTML =
+                        "";
+
+                }
+
+            }
+        );
+
+
+        $("#refreshBtn")
+            .addEventListener(
+                "click",
+                loadContent
+            );
+
+
+        // ============================================================
+        // JOGO
+        // ============================================================
+
+        const canvas =
+            $("#gameCanvas");
+
+
+        const ctx =
+            canvas.getContext(
+                "2d"
+            );
+
+
+        let gameRunning =
+            false;
+
+
+        let score =
+            0;
+
+
+        let lives =
+            3;
+
+
+        let best =
+            Number(
+                localStorage.getItem(
+                    "spaceBest"
+                ) || 0
+            );
+
+
+        let keys =
+            {};
+
+
+        let player;
+
+
+        let objects =
+            [];
+
+
+        let lastSpawn =
+            0;
+
+
+        let gameStart =
+            0;
+
+
+        $("#best")
+            .textContent =
+            best;
+
+
+        window.addEventListener(
+            "keydown",
+            e => {
+
+                const tag =
+                    (
+                        e.target?.tagName ||
+                        ""
+                    ).toLowerCase();
+
+
+                const editing =
+                    tag === "input" ||
+                    tag === "textarea" ||
+                    tag === "select" ||
+                    e.target?.isContentEditable;
+
+
+                if (editing)
+                    return;
+
+
+                if (!gameRunning)
+                    return;
+
+
+                const key =
+                    e.key.toLowerCase();
+
+
+                if (
+                    [
+                        "arrowleft",
+                        "arrowright",
+                        "a",
+                        "d"
+                    ].includes(key)
+                ) {
+
+                    keys[key] =
+                        true;
+
+
+                    e.preventDefault();
+
+                }
+
+            }
+        );
+
+
+        window.addEventListener(
+            "keyup",
+            e => {
+
+                keys[
+                    e.key.toLowerCase()
+                ] = false;
+
+            }
+        );
+
+
+        function bindGameControl(
+            id,
+            key
+        ) {
+
+            const button =
+                document.getElementById(
+                    id
+                );
+
+
+            if (!button)
+                return;
+
+
+            const press =
+                event => {
+
+                    event.preventDefault();
+
+
+                    keys[key] =
+                        true;
+
+
+                    button.classList.add(
+                        "pressed"
+                    );
+
+
+                    if (
+                        button.setPointerCapture &&
+                        event.pointerId !==
+                        undefined
+                    ) {
+
+                        try {
+
+                            button.setPointerCapture(
+                                event.pointerId
+                            );
+
+                        } catch (_) { }
+
+                    }
+
+                };
+
+
+            const release =
+                event => {
+
+                    event.preventDefault();
+
+
+                    keys[key] =
+                        false;
+
+
+                    button.classList.remove(
+                        "pressed"
+                    );
+
+                };
+
+
+            button.addEventListener(
+                "pointerdown",
+                press
+            );
+
+
+            button.addEventListener(
+                "pointerup",
+                release
+            );
+
+
+            button.addEventListener(
+                "pointercancel",
+                release
+            );
+
+
+            button.addEventListener(
+                "pointerleave",
+                release
+            );
+
+
+            button.addEventListener(
+                "lostpointercapture",
+                release
+            );
+
+        }
+
+
+        bindGameControl(
+            "moveLeft",
+            "arrowleft"
+        );
+
+
+        bindGameControl(
+            "moveRight",
+            "arrowright"
+        );
+
+
+        function resetGame() {
+
+            score =
+                0;
+
+
+            lives =
+                3;
+
+
+            objects =
+                [];
+
+
+            lastSpawn =
+                0;
+
+
+            gameStart =
+                performance.now();
+
+
+            player = {
+
+                x:
+                    canvas.width / 2,
+
+                y:
+                    canvas.height - 65,
+
+                w:
+                    45,
+
+                h:
+                    58,
+
+                speed:
+                    6
+
+            };
+
+
+            $("#score")
+                .textContent =
+                0;
+
+
+            $("#lives")
+                .textContent =
+                3;
+
+
+            $("#gameOverlay")
+                .style.display =
+                "none";
+
+
+            gameRunning =
+                true;
+
+
+            requestAnimationFrame(
+                loop
+            );
+
+        }
+
+
+        $("#startGame")
+            .addEventListener(
+                "click",
+                resetGame
+            );
+
+
+        async function openGameFullscreen() {
+
+            const wrap =
+                $("#gameWrap");
+
+
+            try {
+
+                if (
+                    wrap.requestFullscreen
+                ) {
+
+                    await wrap.requestFullscreen();
+
+                } else if (
+                    wrap.webkitRequestFullscreen
+                ) {
+
+                    wrap.webkitRequestFullscreen();
+
+                }
+
+            } catch (err) {
+
+                console.warn(
+                    "Fullscreen indisponível",
+                    err
+                );
+
+            }
+
+        }
+
+
+        $("#fullscreenGame")
+            .addEventListener(
+                "click",
+                async () => {
+
+                    await openGameFullscreen();
+
+
+                    if (!gameRunning)
+                        resetGame();
+
+                }
+            );
+
+
+        document.addEventListener(
+            "fullscreenchange",
+            () => {
+
+                const active =
+                    document.fullscreenElement ===
+                    $("#gameWrap");
+
+
+                $("#fullscreenGame")
+                    .textContent =
+                    active
+                        ? "⛶ JOGO EM TELA CHEIA"
+                        : "🚀 JOGAR EM TELA CHEIA";
+
+            }
+        );
+
+
+        function spawn() {
+
+            const star =
+                Math.random() <
+                .22;
+
+
+            objects.push({
+
+                x:
+                    25 +
+                    Math.random() *
+                    (
+                        canvas.width -
+                        50
+                    ),
+
+                y:
+                    -30,
+
+                size:
+                    star
+                        ? 18
+                        : 18 +
+                        Math.random() *
+                        18,
+
+                speed:
+                    2.3 +
+                    Math.random() *
+                    2.5,
+
+                type:
+                    star
+                        ? "star"
+                        : "meteor",
+
+                rot:
+                    Math.random() *
+                    6
+
+            });
+
+        }
+
+
+        function drawSpace() {
+
+            ctx.clearRect(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+
+            for (
+                let i = 0;
+                i < 75;
+                i++
+            ) {
+
+                const x =
+                    (
+                        i * 97
+                    ) %
+                    canvas.width;
+
+
+                const y =
+                    (
+                        i * 53 +
+                        Math.floor(
+                            (
+                                performance.now() -
+                                gameStart
+                            ) / 20
+                        ) *
+                        (
+                            i % 3
+                        )
+                    ) %
+                    canvas.height;
+
+
+                ctx.fillStyle =
+                    i % 9 === 0
+                        ? "#65cfff"
+                        : "#fff";
+
+
+                ctx.globalAlpha =
+                    .35 +
+                    (
+                        i % 5
+                    ) / 10;
+
+
+                ctx.fillRect(
+                    x,
+                    y,
+                    1 +
+                    (
+                        i % 2
+                    ),
+                    1 +
+                    (
+                        i % 2
+                    )
+                );
+
+            }
+
+
+            ctx.globalAlpha =
+                1;
+
+        }
+
+
+        function drawPlayer() {
+
+            ctx.save();
+
+
+            ctx.translate(
+                player.x,
+                player.y
+            );
+
+
+            ctx.font =
+                "52px serif";
+
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.fillText(
+                "🚀",
+                0,
+                20
+            );
+
+
+            ctx.restore();
+
+        }
+
+
+        function drawObject(
+            o
+        ) {
+
+            ctx.save();
+
+
+            ctx.translate(
+                o.x,
+                o.y
+            );
+
+
+            ctx.rotate(
+                o.rot
+            );
+
+
+            ctx.font =
+                `${o.size * 2}px serif`;
+
+
+            ctx.textAlign =
+                "center";
+
+
+            ctx.fillText(
+                o.type === "star"
+                    ? "⭐"
+                    : "☄️",
+                0,
+                0
+            );
+
+
+            ctx.restore();
+
+        }
+
+
+        function hit(
+            a,
+            b
+        ) {
+
+            return (
+                Math.abs(
+                    a.x - b.x
+                ) <
+                (
+                    a.w / 2 +
+                    b.size * .55
+                )
+            ) &&
+                (
+                    Math.abs(
+                        a.y - b.y
+                    ) <
+                    (
+                        a.h / 2 +
+                        b.size * .7
+                    )
+                );
+
+        }
+
+
+        function loop(
+            t
+        ) {
+
+            if (!gameRunning)
+                return;
+
+
+            drawSpace();
+
+
+            if (
+                keys["arrowleft"] ||
+                keys["a"]
+            ) {
+
+                player.x -=
+                    player.speed;
+
+            }
+
+
+            if (
+                keys["arrowright"] ||
+                keys["d"]
+            ) {
+
+                player.x +=
+                    player.speed;
+
+            }
+
+
+            player.x =
+                Math.max(
+                    28,
+                    Math.min(
+                        canvas.width - 28,
+                        player.x
+                    )
+                );
+
+
+            if (
+                t - lastSpawn >
+                Math.max(
+                    280,
+                    720 -
+                    score * 1.5
+                )
+            ) {
+
+                spawn();
+
+
+                lastSpawn =
+                    t;
+
+            }
+
+
+            objects.forEach(
+                o => {
+
+                    o.y +=
+                        o.speed;
+
+
+                    o.rot +=
+                        .015;
+
+
+                    drawObject(
+                        o
+                    );
+
+                }
+            );
+
+
+            drawPlayer();
+
+
+            objects =
+                objects.filter(
+                    o => {
+
+                        if (
+                            hit(
+                                player,
+                                o
+                            )
+                        ) {
+
+                            if (
+                                o.type ===
+                                "star"
+                            ) {
+
+                                score +=
+                                    10;
+
+
+                                $("#score")
+                                    .textContent =
+                                    score;
+
+
+                                return false;
+
+                            }
+
+
+                            lives--;
+
+
+                            $("#lives")
+                                .textContent =
+                                lives;
+
+
+                            if (
+                                lives <= 0
+                            ) {
+
+                                endGame();
+
+
+                                return false;
+
+                            }
+
+
+                            return false;
+
+                        }
+
+
+                        return (
+                            o.y <
+                            canvas.height +
+                            50
+                        );
+
+                    }
+                );
+
+
+            score +=
+                .02;
+
+
+            $("#score")
+                .textContent =
+                Math.floor(
+                    score
+                );
+
+
+            requestAnimationFrame(
+                loop
+            );
+
+        }
+
+
+        function endGame() {
+
+            gameRunning =
+                false;
+
+
+            score =
+                Math.floor(
+                    score
+                );
+
+
+            if (
+                score >
+                best
+            ) {
+
+                best =
+                    score;
+
+
+                localStorage.setItem(
+                    "spaceBest",
+                    best
+                );
+
+
+                $("#best")
+                    .textContent =
+                    best;
+
+            }
+
+
+            $("#gameOverlay")
+                .style.display =
+                "grid";
+
+
+            $("#gameOverlay h3")
+                .textContent =
+                `Missão encerrada!\nPontuação: ${score}`;
+
+
+            $("#startGame")
+                .textContent =
+                "Tentar novamente";
+
+        }
+
+
+        // ============================================================
+        // INICIALIZAÇÃO
+        // ============================================================
+
+        loadContent();
+
+
+        // ============================================================
+        // SOM
+        // ============================================================
+
+        let audioCtx =
+            null;
+
+
+        $("#soundBtn")
+            .addEventListener(
+                "click",
+                () => {
+
+                    if (!audioCtx) {
+
+                        audioCtx =
+                            new (
+                                window.AudioContext ||
+                                window.webkitAudioContext
+                            )();
+
+                    }
+
+
+                    const o =
+                        audioCtx.createOscillator();
+
+
+                    const g =
+                        audioCtx.createGain();
+
+
+                    o.frequency.value =
+                        520;
+
+
+                    g.gain.setValueAtTime(
+                        .05,
+                        audioCtx.currentTime
+                    );
+
+
+                    g.gain.exponentialRampToValueAtTime(
+                        .001,
+                        audioCtx.currentTime +
+                        .2
+                    );
+
+
+                    o.connect(g);
+
+
+                    g.connect(
+                        audioCtx.destination
+                    );
+
+
+                    o.start();
+
+
+                    o.stop(
+                        audioCtx.currentTime +
+                        .2
+                    );
+
+
+                    $("#soundBtn")
+                        .textContent =
+                        $("#soundBtn")
+                            .textContent ===
+                            "🔊"
+                            ? "🔇"
+                            : "🔊";
+
+                }
+            );
+
+    </script>
 
 </body>
+
 </html>
